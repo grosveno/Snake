@@ -116,7 +116,7 @@ void update(int* cells, size_t width, size_t height, snake_t* snake_p,
     //if next is food, food is eaten and score adds
     if ((cells[new_location] & FLAG_FOOD)) {
         place_food(cells, width, height);
-        g_score++;
+        g_score += 10;
         cells[new_location] ^= FLAG_FOOD; 
         if (growing == 0) {
             // remove the snake from tail location 
