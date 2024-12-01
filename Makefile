@@ -31,6 +31,6 @@ format:
 
 clean:
 	rm -f $(BIN)
-	rm -f ${OBJS)
+	rm -f $(OBJS)
 
 .PHONY: all clean format
