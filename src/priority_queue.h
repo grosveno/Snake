@@ -6,19 +6,16 @@
 
 #define MAX_SIZE 100
 
-// 定义优先队列节点结构
 typedef struct {
-    int priority;  // 整数优先级
-    char *data;    // 字符串数据
+    int priority;  
+    char *data;    
 } QueueNode;
 
-// 定义优先队列结构
 typedef struct {
     QueueNode items[MAX_SIZE];
     int size;
 } PriorityQueue;
 
-// 函数原型声明
 void insert(PriorityQueue *pq, int priority, char *data);
 char* extractMax(PriorityQueue *pq);
 void buildMaxHeap(PriorityQueue *pq);

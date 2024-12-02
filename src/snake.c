@@ -17,22 +17,17 @@ void read_txt(char* filename, char** board) {
     FILE *file;
     long fileLen;
 
-    // 打开文件
     file = fopen(filename, "rb");
     
-    // 获取文件大小
     fseek(file, 0, SEEK_END);
     fileLen = ftell(file);
     rewind(file);
 
-    // 分配内存
     *board = (char *)malloc(fileLen + 1);
 
-    // 读取文件内容到内存
     fread(*board, fileLen, 1, file);
-    (*board)[fileLen] = '\0'; // 确保字符串以NULL结尾
+    (*board)[fileLen] = '\0'; 
 
-    // 关闭文件
     fclose(file);
 }
 
@@ -73,8 +68,6 @@ void over_game(int* cells, size_t width, size_t height, snake_t* snake_p, char* 
 
     // Free any memory we've taken
     teardown(cells, snake_p, board);
-
-    // ****************** UNCOMMENT THIS CODE IN PART 3B ***********************
     
     // Render final GAME OVER PRESS ANY KEY TO EXIT screen
     render_game_over(width, height);
@@ -175,27 +168,12 @@ int main(int argc, char** argv) {
                 return 0;
         }
 
-        // ----------- DO NOT MODIFY ANYTHING IN `main` ABOVE THIS LINE -----------
-
         // Check validity of the board before rendering!
-        // TODO: Implement (in Part 2)
         if (status != INIT_SUCCESS) {
             return EXIT_FAILURE;
         }
 
-        // Read in the player's name & save its name and length
-        // TODO: Implement (in Part 3B)
-        
-        // ? save name_buffer ?
-        // ? save mbslen(name_buffer) ?
-        
-
-
-        // TODO: Remove this message, uncomment the code below this message
-        //       and implement Part 1A here.
-        
         initialize_window(width, height);
-        // TODO: implement the game loop here (Part 1A)!
         enum input_key real_input = INPUT_RIGHT;
         int speed = 0;
         while (!g_game_over) {

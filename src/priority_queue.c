@@ -40,7 +40,7 @@ void insert(PriorityQueue *pq, int priority, char *data) {
         return;
     }
     pq->items[pq->size].priority = priority;
-    pq->items[pq->size].data = strdup(data); // 复制字符串
+    pq->items[pq->size].data = strdup(data); 
     pq->size++;
     int i = pq->size - 1;
     while (i != 0 && pq->items[(i - 1) / 2].priority < pq->items[i].priority) {
@@ -54,8 +54,8 @@ char* extractMax(PriorityQueue *pq) {
         printf("Priority Queue is empty\n");
         return NULL;
     }
-    char *rootData = pq->items[0].data; // 保存根节点的数据
+    char *rootData = pq->items[0].data; 
     pq->items[0] = pq->items[--pq->size];
     maxHeapify(pq, 0);
-    return rootData; // 返回根节点的数据
+    return rootData; 
 }

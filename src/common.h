@@ -5,8 +5,6 @@
 
 #include "linked_list.h"
 #include "priority_queue.h"
-// Let's see if we can keep this as simple as possible, lest we intimidate
-// students looking through the provided code.
 
 // Bitflags enable us to store cell data in integers!
 #define PLAIN_CELL 0b0000      // equals 0
@@ -24,7 +22,6 @@
  */
 enum input_key { INPUT_UP, INPUT_DOWN, INPUT_LEFT, INPUT_RIGHT, INPUT_SPEEDUP, INPUT_SPEEDDOWN, INPUT_PAUSE, INPUT_NONE };
 
-// TODO: declare global variables needed for your snake (as `extern`)! (part 1A)
 
 /** Global variables for game status.
  *
@@ -46,7 +43,6 @@ extern PriorityQueue scores;
  *  - None yet!
  */
 typedef struct snake {
-    // TODO: Define your snake struct! (in ')
     // Store any necessary information about your snake here.
     node_t* snake_position;   
     enum input_key snake_direction;

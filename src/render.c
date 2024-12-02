@@ -31,7 +31,6 @@
  *  - height: height of the board.
  */
 void check_terminal_size(size_t width, size_t height) {
-    /* DO NOT MODIFY THIS FUNCTION */
     // use ncurses to get terminal dimensions.
     int req_h = (int)height + 2;
     int req_w = (int)width;
@@ -43,7 +42,6 @@ void check_terminal_size(size_t width, size_t height) {
             req_w, req_h, COLS, LINES);
         exit(1);
     }
-    /* DO NOT MODIFY THIS FUNCTION */
 }
 
 /** Helper function that initializes the ncurses window and checks the terminal
@@ -52,7 +50,6 @@ void check_terminal_size(size_t width, size_t height) {
  *  - height: height of the board.
  */
 void initialize_window(size_t width, size_t height) {
-    /* DO NOT MODIFY THIS FUNCTION */
     // Ncurses setup
     setlocale(LC_ALL, "");
 
@@ -83,7 +80,6 @@ void initialize_window(size_t width, size_t height) {
     init_pair(4, COLOR_RED, -1);
     init_pair(5, COLOR_WHITE, -1);
     init_pair(6, COLOR_GREEN, -1);
-    /* DO NOT MODIFY THIS FUNCTION */
 }
 
 /** Renders the current game's board.
@@ -94,7 +90,6 @@ void initialize_window(size_t width, size_t height) {
  *  - height: height of the board.
  */
 void render_game(int* cells, size_t width, size_t height) {
-    /* DO NOT MODIFY THIS FUNCTION */
     for (unsigned i = 0; i < width * height; ++i) {
         if (cells[i] & FLAG_SNAKE) {
             char c = 'S';
@@ -136,5 +131,4 @@ void render_game(int* cells, size_t width, size_t height) {
     // right-aligning is very doable, but a tad bit less approachable
 
     refresh();
-    /* DO NOT MODIFY THIS FUNCTION */
 }

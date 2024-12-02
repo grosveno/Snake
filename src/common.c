@@ -2,9 +2,6 @@
 
 #include <stdlib.h>
 
-// TODO: define global variables needed for your snake! (part 1A)
-
-
 // Definition of global variables for game status.
 int g_game_over;
 int g_score;
@@ -27,7 +24,5 @@ void set_seed(unsigned seed) {
  *  - `size`: the upper bound for the generated value (exclusive).
  */
 unsigned generate_index(unsigned size) {
-    /* DO NOT MODIFY THIS FUNCTION */
     return rand() % size;
-    /* DO NOT MODIFY THIS FUNCTION */
 }
