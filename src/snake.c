@@ -225,4 +225,11 @@ int main(int argc, char** argv) {
             break;
         } 
     } while (1);
+    clear();
+    render_game_end(width, height);
+    usleep(1000 * 1000);  // 1000ms
+    cbreak(); // Leave halfdelay mode
+    getch();
+    // tell ncurses that we're done
+    endwin();
 }

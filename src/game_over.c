@@ -38,3 +38,13 @@ void render_game_over(size_t width, size_t height) {
 
     refresh();
 }
+void render_game_end(size_t width, size_t height) {
+    int x_center = ((int)width / 2);
+    WRITEW(0, x_center - 3, "RANKING");
+    WRITEW(1, 0, "Name");
+    WRITEW(1, x_center, "SCORE");
+    WRITEW(2, 0, "%s", g_name);
+    WRITEW(2, x_center, "%d", g_score);
+    WRITEW(3, 0, "\n");
+    refresh();
+}
