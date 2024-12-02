@@ -230,7 +230,6 @@ int main(int argc, char** argv) {
             read_status(status_buffer);
         } while (strcmp(status_buffer, "yes") != 0 && strcmp(status_buffer, "no"));
         insert(&scores, g_score, g_name); 
-        buildMaxHeap(&scores);
         if (strcmp(status_buffer, "yes") != 0) {
             break;
         }
