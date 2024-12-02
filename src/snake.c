@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stddef.h>
+#include <string.h>
 
 #include "game.h"
 #include "game_over.h"
@@ -73,71 +74,82 @@ int main(int argc, char** argv) {
 
     enum board_init_status status;
 
-    // initialize board from command line arguments
-    switch (argc) {
-        case (2):
-            snake_grows = atoi(argv[1]);
-            if (snake_grows != 1 && snake_grows != 0) {
-                printf(
-                    "snake_grows must be either 1 (grows) or 0 (does not "
-                    "grow)\n");
-                return 0;
-            }
-            status = initialize_game(&cells, &width, &height, &snake, NULL);
-            break;
-        case (3):
-            snake_grows = atoi(argv[1]);
-            if (snake_grows != 1 && snake_grows != 0) {
-                printf(
-                    "snake_grows must be either 1 (grows) or 0 (does not "
-                    "grow)\n");
-                return 0;
-            } else if (*argv[2] == '\0') {
-                status = initialize_game(&cells, &width, &height, &snake, NULL);
-                break;
-            }
-            status = initialize_game(&cells, &width, &height, &snake, argv[2]);
-            break;
-        case (1):
-        default:
-            printf("usage: snake <GROWS: 0|1> [BOARD STRING]\n");
-            return 0;
-    }
-
-    // ----------- DO NOT MODIFY ANYTHING IN `main` ABOVE THIS LINE -----------
-
-    // Check validity of the board before rendering!
-    // TODO: Implement (in Part 2)
-    if (status != INIT_SUCCESS) {
-        return EXIT_FAILURE;
-    }
-
-    // Read in the player's name & save its name and length
-    // TODO: Implement (in Part 3B)
-    char name_buffer[1000];
-    read_name(name_buffer);
-    // ? save name_buffer ?
-    // ? save mbslen(name_buffer) ?
-    g_name = name_buffer;
-    g_name_len = mbslen(name_buffer);
-
-
-    // TODO: Remove this message, uncomment the code below this message
-    //       and implement Part 1A here.
     printf(
         "             ____   \n"
         "Hello       / . .\\ \n"
-        "CS 300      \\  ---<\n"
-        "student!     \\  /  \n"
+        "welcome to  \\  ---<\n"
+        "snake        \\  /  \n"
         "   __________/ /    \n"
         "-=:___________/\n");
+    do {
+        char name_buffer[1000];
+        read_name(name_buffer);
+        g_name = name_buffer;
+        g_name_len = mbslen(name_buffer);
+        // initialize board from command line arguments
+        switch (argc) {
+            case (2):
+                snake_grows = atoi(argv[1]);
+                if (snake_grows != 1 && snake_grows != 0) {
+                    printf(
+                        "snake_grows must be either 1 (grows) or 0 (does not "
+                        "grow)\n");
+                    return 0;
+                }
+                status = initialize_game(&cells, &width, &height, &snake, NULL);
+                break;
+            case (3):
+                snake_grows = atoi(argv[1]);
+                if (snake_grows != 1 && snake_grows != 0) {
+                    printf(
+                        "snake_grows must be either 1 (grows) or 0 (does not "
+                        "grow)\n");
+                    return 0;
+                } else if (*argv[2] == '\0') {
+                    status = initialize_game(&cells, &width, &height, &snake, NULL);
+                    break;
+                }
+                status = initialize_game(&cells, &width, &height, &snake, argv[2]);
+                break;
+            case (1):
+            default:
+                printf("usage: snake <GROWS: 0|1> [BOARD STRING]\n");
+                return 0;
+        }
 
-    initialize_window(width, height);
-    // TODO: implement the game loop here (Part 1A)!
-    while (!g_game_over) {
-        usleep(100000);
-        update(cells, width, height, &snake, get_input(), snake_grows);
-        render_game(cells, width, height);
-    }
-    end_game(cells, width, height, &snake);
+        // ----------- DO NOT MODIFY ANYTHING IN `main` ABOVE THIS LINE -----------
+
+        // Check validity of the board before rendering!
+        // TODO: Implement (in Part 2)
+        if (status != INIT_SUCCESS) {
+            return EXIT_FAILURE;
+        }
+
+        // Read in the player's name & save its name and length
+        // TODO: Implement (in Part 3B)
+        
+        // ? save name_buffer ?
+        // ? save mbslen(name_buffer) ?
+        
+
+
+        // TODO: Remove this message, uncomment the code below this message
+        //       and implement Part 1A here.
+        
+        initialize_window(width, height);
+        // TODO: implement the game loop here (Part 1A)!
+        while (!g_game_over) {
+            usleep(100000);
+            update(cells, width, height, &snake, get_input(), snake_grows);
+            render_game(cells, width, height);
+        }
+        end_game(cells, width, height, &snake);
+        char status_buffer[100];
+        do {
+            read_status(status_buffer);
+        } while (strcmp(status_buffer, "yes") != 0 && strcmp(status_buffer, "no"));
+        if (strcmp(status_buffer, "yes") != 0) {
+            break;
+        } 
+    } while (1);
 }

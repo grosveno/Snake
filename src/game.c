@@ -175,6 +175,20 @@ void read_name(char* write_into) {
     }
 }
 
+void read_status(char* write_into) {
+    while (true) {
+        printf("Do you want to another game?(input yes or no)> ");
+        fflush(stdin);
+        fflush(stdout);
+        int bytes = (int)read(0, write_into, 1000);
+        if (bytes > 1) {
+            write_into[bytes - 1] = '\0';
+            break;
+        }
+        printf("\nStatus Invalid: must be longer than 0 characters.\n");
+    }
+}
+
 /** Cleans up on game over — should free any allocated memory so that the
  * LeakSanitizer doesn't complain.
  * Arguments:
