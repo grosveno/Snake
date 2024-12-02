@@ -31,6 +31,25 @@ void read_txt(char* filename, char** board) {
     fclose(file);
 }
 
+void output_rank() {
+    FILE *file;    
+    char filename[] = "output/rank.txt"; 
+
+    file = fopen(filename, "w");
+
+    char label[100];
+    sprintf(label, "%-6s%s%10s", "Rank", "Name", "Score");
+    fprintf(file, "%s", label);
+    for (int i = 0; i < scores.size; i++) {
+        fprintf(file, "\n");
+        char out[100];
+        sprintf(out, "%-6d%s%10d", i + 1, scores.items->data, scores.items->priority);  
+        fprintf(file, "%s", out);     
+    }
+
+    fclose(file);
+}
+
 /** Gets the next input from the user, or returns INPUT_NONE if no input is
  * provided quickly enough.
  */
@@ -217,4 +236,5 @@ int main(int argc, char** argv) {
         }
     } while (1);
     end_game(width, height);
+    output_rank();
 }

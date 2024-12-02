@@ -40,11 +40,13 @@ void render_game_over(size_t width, size_t height) {
 void render_game_end(size_t width, size_t height) {
     int x_center = ((int)width / 2);
     WRITEW(0, x_center - 3, "RANKING");
-    WRITEW(1, 0, "Name");
-    WRITEW(1, x_center, "SCORE");
+    WRITEW(1, 0, "Rank");
+    WRITEW(1, 6, "Name");
+    WRITEW(1, 6 + x_center, "SCORE");
     for (int i = 0; i < scores.size; i++) {
-        WRITEW(2 + i, 0, "%s", scores.items[i].data);
-        WRITEW(2 + i, x_center, "%d", scores.items[i].priority);
+        WRITEW(2 + i, 0, "%d", i + 1);
+        WRITEW(2 + i, 6, "%s", scores.items[i].data);
+        WRITEW(2 + i, 6 + x_center, "%d", scores.items[i].priority);
     }
     refresh();
 }
