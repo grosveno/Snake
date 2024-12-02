@@ -28,6 +28,10 @@ enum input_key get_input() {
         return INPUT_LEFT;
     } else if (input == KEY_RIGHT) {
         return INPUT_RIGHT;
+    } else if (input == KEY_F(1)) {
+        return INPUT_SPEEDUP;
+    } else if (input == KEY_F(2)) {
+        return INPUT_SPEEDDOWN;
     } else if (input == ' ') {
         return INPUT_PAUSE;
     } else {
@@ -141,9 +145,15 @@ int main(int argc, char** argv) {
         initialize_window(width, height);
         // TODO: implement the game loop here (Part 1A)!
         enum input_key real_input = INPUT_RIGHT;
+        int speed = 0;
         while (!g_game_over) {
-            usleep(100000);
             enum input_key input = get_input();
+            usleep(130000);
+            if (input == INPUT_SPEEDUP) {
+                speed = 2;
+            } else if (input == INPUT_SPEEDDOWN) {
+                speed = -2;
+            } 
             if (input == INPUT_PAUSE && real_input == INPUT_PAUSE) {
                 real_input = snake.snake_direction;
             } else if (input != INPUT_PAUSE && real_input == INPUT_PAUSE) {
@@ -152,7 +162,16 @@ int main(int argc, char** argv) {
                 real_input = input;
             }
             if (real_input != INPUT_PAUSE) {
-                update(cells, width, height, &snake, input, snake_grows);
+                if (speed == 0) {
+                    update(cells, width, height, &snake, input, snake_grows);
+                }
+                while (speed > 0) {
+                    speed--;
+                    update(cells, width, height, &snake, input, snake_grows);
+                }
+                if (speed < 0) {
+                    speed++;
+                }
             }
             render_game(cells, width, height);
         }
