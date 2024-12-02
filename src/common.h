@@ -4,6 +4,7 @@
 #include <stddef.h>
 
 #include "linked_list.h"
+#include "priority_queue.h"
 // Let's see if we can keep this as simple as possible, lest we intimidate
 // students looking through the provided code.
 
@@ -39,6 +40,7 @@ extern int g_game_over;  // 1 if game is over, 0 otherwise
 extern int g_score;      // game score: 1 point for every food eaten
 extern int g_name_len;
 extern char* g_name;
+extern PriorityQueue scores;
 /** Snake struct. This struct is not needed until part 3!
  * Fields:
  *  - None yet!

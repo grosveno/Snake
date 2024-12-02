@@ -1,9 +1,10 @@
 #include "priority_queue.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-void swap(int *a, int *b) {
-    int temp = *a;
+void swap(QueueNode *a, QueueNode *b) {
+    QueueNode temp = *a;
     *a = *b;
     *b = temp;
 }
@@ -13,11 +14,11 @@ void maxHeapify(PriorityQueue *pq, int i) {
     int left = 2 * i + 1;
     int right = 2 * i + 2;
 
-    if (left < pq->size && pq->items[left] > pq->items[largest]) {
+    if (left < pq->size && pq->items[left].priority > pq->items[largest].priority) {
         largest = left;
     }
 
-    if (right < pq->size && pq->items[right] > pq->items[largest]) {
+    if (right < pq->size && pq->items[right].priority > pq->items[largest].priority) {
         largest = right;
     }
 
@@ -33,27 +34,28 @@ void buildMaxHeap(PriorityQueue *pq) {
     }
 }
 
-void insert(PriorityQueue *pq, int value) {
+void insert(PriorityQueue *pq, int priority, char *data) {
     if (pq->size >= MAX_SIZE) {
         printf("Priority Queue is full\n");
         return;
     }
-    pq->items[pq->size] = value;
+    pq->items[pq->size].priority = priority;
+    pq->items[pq->size].data = strdup(data); // 复制字符串
     pq->size++;
     int i = pq->size - 1;
-    while (i != 0 && pq->items[(i - 1) / 2] < pq->items[i]) {
+    while (i != 0 && pq->items[(i - 1) / 2].priority < pq->items[i].priority) {
         swap(&pq->items[(i - 1) / 2], &pq->items[i]);
         i = (i - 1) / 2;
     }
 }
 
-int extractMax(PriorityQueue *pq) {
+char* extractMax(PriorityQueue *pq) {
     if (pq->size == 0) {
         printf("Priority Queue is empty\n");
-        return -1;
+        return NULL;
     }
-    int root = pq->items[0];
+    char *rootData = pq->items[0].data; // 保存根节点的数据
     pq->items[0] = pq->items[--pq->size];
     maxHeapify(pq, 0);
-    return root;
+    return rootData; // 返回根节点的数据
 }

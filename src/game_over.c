@@ -43,8 +43,9 @@ void render_game_end(size_t width, size_t height) {
     WRITEW(0, x_center - 3, "RANKING");
     WRITEW(1, 0, "Name");
     WRITEW(1, x_center, "SCORE");
-    WRITEW(2, 0, "%s", g_name);
-    WRITEW(2, x_center, "%d", g_score);
-    WRITEW(3, 0, "\n");
+    for (int i = 0; i < scores.size; i++) {
+        WRITEW(2 + i, 0, "%s", scores.items[i].data);
+        WRITEW(2 + i, x_center, "%d", scores.items[i].priority);
+    }
     refresh();
 }

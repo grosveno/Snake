@@ -10,6 +10,7 @@ int g_game_over;
 int g_score;
 int g_name_len;
 char* g_name;
+PriorityQueue scores = {};
 
 /** Sets the seed for random number generation.
  * Arguments:
