@@ -84,6 +84,7 @@ void over_game(int* cells, size_t width, size_t height, snake_t* snake_p, char* 
     
 
     // tell ncurses that we're done
+    clear();
     endwin();
 }
 
