@@ -68,7 +68,7 @@ enum input_key get_input() {
 /** Helper function that procs the GAME OVER screen and final key prompt.
  * `snake_p` is not needed until Part 3!
  */
-void end_game(int* cells, size_t width, size_t height, snake_t* snake_p, char* board) {
+void over_game(int* cells, size_t width, size_t height, snake_t* snake_p, char* board) {
     // Game over!
 
     // Free any memory we've taken
@@ -83,6 +83,16 @@ void end_game(int* cells, size_t width, size_t height, snake_t* snake_p, char* b
     getch();
     
 
+    // tell ncurses that we're done
+    endwin();
+}
+
+void end_game(size_t width, size_t height) {
+    clear();
+    render_game_end(width, height);
+    usleep(1000 * 1000);  // 1000ms
+    cbreak(); // Leave halfdelay mode
+    getch();
     // tell ncurses that we're done
     endwin();
 }
@@ -216,7 +226,7 @@ int main(int argc, char** argv) {
             }
             render_game(cells, width, height);
         }
-        end_game(cells, width, height, &snake, board);
+        over_game(cells, width, height, &snake, board);
         char status_buffer[100];
         do {
             read_status(status_buffer);
@@ -225,11 +235,5 @@ int main(int argc, char** argv) {
             break;
         } 
     } while (1);
-    clear();
-    render_game_end(width, height);
-    usleep(1000 * 1000);  // 1000ms
-    cbreak(); // Leave halfdelay mode
-    getch();
-    // tell ncurses that we're done
-    endwin();
+    end_game(width, height);
 }

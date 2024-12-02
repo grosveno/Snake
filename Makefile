@@ -3,7 +3,7 @@ FLAGS = -ggdb3 -Wall -Wextra -Wshadow -std=gnu11 -Wno-unused-parameter -Wno-unus
 
 # Linking ncurses works differently on Linux and Mac. Detect
 # OS to account for this
-HOST_SYSTEM = $(shell uname | cut -f 1 -d_)
+HOST_SYSTEM = $(shell uname | cut -f1 -d_)
 SYSTEM ?= $(HOST_SYSTEM)
 ifeq ($(SYSTEM),Darwin)
 LIBS = -lncurses
@@ -14,7 +14,7 @@ FLAGS += $(shell ncursesw5-config --cflags)
 endif
 
 FILES = $(wildcard src/*.c) $(wildcard src/*.h)
-OBJS = src/game.o src/game_setup.o src/render.o src/common.o src/linked_list.o src/mbstrings.o src/game_over.o
+OBJS = src/game.o src/game_setup.o src/render.o src/common.o src/linked_list.o src/mbstrings.o src/game_over.o src/priority_queue.o
 BIN = snake
 
 all: $(BIN)
