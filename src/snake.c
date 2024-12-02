@@ -28,6 +28,8 @@ enum input_key get_input() {
         return INPUT_LEFT;
     } else if (input == KEY_RIGHT) {
         return INPUT_RIGHT;
+    } else if (input == ' ') {
+        return INPUT_PAUSE;
     } else {
         // if the input isn't an arrow key, we treat it as no input (could add
         // other keys in if we want other commands, like 'pause' or 'quit')
@@ -138,9 +140,20 @@ int main(int argc, char** argv) {
         
         initialize_window(width, height);
         // TODO: implement the game loop here (Part 1A)!
+        enum input_key real_input = INPUT_RIGHT;
         while (!g_game_over) {
             usleep(100000);
-            update(cells, width, height, &snake, get_input(), snake_grows);
+            enum input_key input = get_input();
+            if (input == INPUT_PAUSE && real_input == INPUT_PAUSE) {
+                real_input = snake.snake_direction;
+            } else if (input != INPUT_PAUSE && real_input == INPUT_PAUSE) {
+                real_input = INPUT_PAUSE;
+            } else if (input != INPUT_NONE) {
+                real_input = input;
+            }
+            if (real_input != INPUT_PAUSE) {
+                update(cells, width, height, &snake, input, snake_grows);
+            }
             render_game(cells, width, height);
         }
         end_game(cells, width, height, &snake);

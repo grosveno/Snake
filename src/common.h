@@ -21,7 +21,7 @@
  * of this type can take on the following values:
  * INPUT_UP, INPUT_DOWN, INPUT_LEFT, INPUT_RIGHT, and INPUT_NONE.
  */
-enum input_key { INPUT_UP, INPUT_DOWN, INPUT_LEFT, INPUT_RIGHT, INPUT_NONE };
+enum input_key { INPUT_UP, INPUT_DOWN, INPUT_LEFT, INPUT_RIGHT, INPUT_PAUSE, INPUT_NONE };
 
 // TODO: declare global variables needed for your snake (as `extern`)! (part 1A)
 
