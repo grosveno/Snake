@@ -13,6 +13,29 @@
 #include "render.h"
 #include "common.h"
 
+void read_txt(char* filename, char** board) {
+    FILE *file;
+    long fileLen;
+
+    // 打开文件
+    file = fopen(filename, "rb");
+    
+    // 获取文件大小
+    fseek(file, 0, SEEK_END);
+    fileLen = ftell(file);
+    rewind(file);
+
+    // 分配内存
+    *board = (char *)malloc(fileLen + 1);
+
+    // 读取文件内容到内存
+    fread(*board, fileLen, 1, file);
+    (*board)[fileLen] = '\0'; // 确保字符串以NULL结尾
+
+    // 关闭文件
+    fclose(file);
+}
+
 /** Gets the next input from the user, or returns INPUT_NONE if no input is
  * provided quickly enough.
  */
@@ -93,6 +116,23 @@ int main(int argc, char** argv) {
         g_name = name_buffer;
         g_name_len = mbslen(name_buffer);
         char* board = NULL;
+        char board_buffer[100];
+        read_board(board_buffer);
+        int board_number = atoi(board_buffer);
+        switch (board_number) {
+            case 1:
+                read_txt("board/1.txt", &board);
+                break;
+            case 2:
+                read_txt("board/2.txt", &board);
+                break;
+            case 3:
+                read_txt("board/3.txt", &board);
+                break;
+            default:
+                break;
+
+        }
         // initialize board from command line arguments
         switch (argc) {
             case (2):
@@ -103,7 +143,7 @@ int main(int argc, char** argv) {
                         "grow)\n");
                     return 0;
                 }
-                status = initialize_game(&cells, &width, &height, &snake, NULL);
+                status = initialize_game(&cells, &width, &height, &snake, board);
                 break;
             case (3):
                 snake_grows = atoi(argv[1]);
@@ -113,7 +153,7 @@ int main(int argc, char** argv) {
                         "grow)\n");
                     return 0;
                 } else if (*argv[2] == '\0') {
-                    status = initialize_game(&cells, &width, &height, &snake, NULL);
+                    status = initialize_game(&cells, &width, &height, &snake, board);
                     break;
                 }
                 status = initialize_game(&cells, &width, &height, &snake, argv[2]);
