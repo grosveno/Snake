@@ -45,11 +45,11 @@ enum input_key get_input() {
 /** Helper function that procs the GAME OVER screen and final key prompt.
  * `snake_p` is not needed until Part 3!
  */
-void end_game(int* cells, size_t width, size_t height, snake_t* snake_p) {
+void end_game(int* cells, size_t width, size_t height, snake_t* snake_p, char* board) {
     // Game over!
 
     // Free any memory we've taken
-    teardown(cells, snake_p);
+    teardown(cells, snake_p, board);
 
     // ****************** UNCOMMENT THIS CODE IN PART 3B ***********************
     
@@ -92,6 +92,7 @@ int main(int argc, char** argv) {
         read_name(name_buffer);
         g_name = name_buffer;
         g_name_len = mbslen(name_buffer);
+        char* board = NULL;
         // initialize board from command line arguments
         switch (argc) {
             case (2):
@@ -175,7 +176,7 @@ int main(int argc, char** argv) {
             }
             render_game(cells, width, height);
         }
-        end_game(cells, width, height, &snake);
+        end_game(cells, width, height, &snake, board);
         char status_buffer[100];
         do {
             read_status(status_buffer);

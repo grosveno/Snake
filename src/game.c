@@ -189,6 +189,21 @@ void read_status(char* write_into) {
     }
 }
 
+void read_board(char* write_into) {
+    while (true) {
+        printf("if you use default board, input any number except 1,2,3\n");
+        printf("choose your loved board(input 1 or 2 or 3 )> ");
+        fflush(stdin);
+        fflush(stdout);
+        int bytes = (int)read(0, write_into, 1000);
+        if (bytes > 1) {
+            write_into[bytes - 1] = '\0';
+            break;
+        }
+        printf("\nBoard Invalid: must be longer than 0 characters.\n");
+    }
+}
+
 /** Cleans up on game over — should free any allocated memory so that the
  * LeakSanitizer doesn't complain.
  * Arguments:
@@ -196,10 +211,13 @@ void read_status(char* write_into) {
  *    each board cell.
  *  - snake_p: a pointer to your snake struct. (not needed until part 3)
  */
-void teardown(int* cells, snake_t* snake_p) {
+void teardown(int* cells, snake_t* snake_p, char* board) {
     // TODO: implement!
     free(cells);
     while (snake_p->snake_position) {
         free(remove_last(&snake_p->snake_position));
+    }
+    if (board != NULL) {
+        free(board);
     }
 }
