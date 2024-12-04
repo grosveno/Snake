@@ -1,5 +1,9 @@
 Rank  Name     Score
-1     jpf         0
-2     jpf         0
-3     jpf         0
-4     jpf         0
+1     zzh       80
+2     lbh       80
+3     cty       60
+4     吴         40
+5     wyt       30
+6     杨         10
+7     yyh        0
+8     yzh        0

@@ -43,11 +43,12 @@ void render_game_end(size_t width, size_t height) {
     WRITEW(1, 0, "Rank");
     WRITEW(1, 6, "Name");
     WRITEW(1, 6 + x_center, "SCORE");
-    for (int i = scores.size - 1; i >= 0; i--) {
-        int index = scores.size - 1 - i;
-        WRITEW(2 + index, 0, "%d", index + 1);
-        WRITEW(2 + index, 6, "%s", scores.items[i].data);
-        WRITEW(2 + index, 6 + x_center, "%d", scores.items[i].priority);
+    Node* cur = scores->head;
+    for (int i = 0; i < scores->size; i++) {
+        WRITEW(2 + i, 0, "%d", i + 1);
+        WRITEW(2 + i, 6, "%s", cur->name);
+        WRITEW(2 + i, 6 + x_center, "%d", cur->data);
+        cur = cur->next;
     }
     refresh();
 }

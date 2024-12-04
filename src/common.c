@@ -1,14 +1,14 @@
 #include "common.h"
 
 #include <stdlib.h>
+#include "priority_queue.h"
 
 // Definition of global variables for game status.
 int g_game_over;
 int g_score;
 int g_name_len;
 char* g_name;
-PriorityQueue scores = {};
-
+PriorityQueue* scores;
 /** Sets the seed for random number generation.
  * Arguments:
  *  - `seed`: the seed.

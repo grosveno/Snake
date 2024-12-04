@@ -40,11 +40,14 @@ void output_rank() {
     char label[100];
     sprintf(label, "%-6s%s%10s", "Rank", "Name", "Score");
     fprintf(file, "%s", label);
-    for (int i = 0; i < scores.size; i++) {
+    Node* cur = scores->head;
+    for (int i = 0; i < scores->size; i++) {
         fprintf(file, "\n");
         char out[100];
-        sprintf(out, "%-6d%s%10d", i + 1, scores.items->data, scores.items->priority);  
+        int len = mbslen(cur->name);
+        sprintf(out, "%-6d%s%*d", i + 1, len, cur->name, 12 - len, cur->data);
         fprintf(file, "%s", out);     
+        cur = cur->next;
     }
 
     fclose(file);
@@ -125,6 +128,7 @@ int main(int argc, char** argv) {
     int snake_grows;  // 1 if snake should grow, 0 otherwise.
 
     enum board_init_status status;
+    scores = createPriorityQueue();
 
     printf(
         "             ____   \n"
@@ -229,11 +233,12 @@ int main(int argc, char** argv) {
         do {
             read_status(status_buffer);
         } while (strcmp(status_buffer, "yes") != 0 && strcmp(status_buffer, "no"));
-        insert(&scores, g_score, g_name); 
+        insertPriorityQueue(scores, g_name, g_score);
         if (strcmp(status_buffer, "yes") != 0) {
             break;
         }
     } while (1);
     end_game(width, height);
     output_rank();
+    destroyPriorityQueue(scores);
 }

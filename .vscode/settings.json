@@ -2,6 +2,8 @@
     "files.associations": {
         "stdlib.h": "c",
         "time.h": "c",
-        "common.h": "c"
-    }
+        "common.h": "c",
+        "random": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
