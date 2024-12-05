@@ -31,7 +31,6 @@ void update(int* cells, size_t width, size_t height, snake_t* snake_p,
     // increases by 1. This function assumes that the board is surrounded by
     // walls, so it does not handle the case where a snake runs off the board.
 
-    // TODO: implement!
     // if g_game_over = 1, game over
     if (g_game_over) {
         return;
@@ -144,7 +143,6 @@ void update(int* cells, size_t width, size_t height, snake_t* snake_p,
  *  - height: the height of the board
  */
 void place_food(int* cells, size_t width, size_t height) {
-    /* DO NOT MODIFY THIS FUNCTION */
     unsigned food_index = generate_index(width * height);
     // check that the cell is empty or only contains grass
     if ((*(cells + food_index) == PLAIN_CELL) || (*(cells + food_index) == FLAG_GRASS)) {
@@ -152,7 +150,6 @@ void place_food(int* cells, size_t width, size_t height) {
     } else {
         place_food(cells, width, height);
     }
-    /* DO NOT MODIFY THIS FUNCTION */
 }
 
 /** Prompts the user for their name and saves it in the given buffer.
@@ -160,8 +157,6 @@ void place_food(int* cells, size_t width, size_t height) {
  *  - `write_into`: a pointer to the buffer to be written into.
  */
 void read_name(char* write_into) {
-    // TODO: implement! (remove the call to strcpy once you begin your
-    // implementation)
     while (true) {
         printf("Name > ");
         fflush(stdin);

@@ -57,7 +57,6 @@ void output_rank() {
  * provided quickly enough.
  */
 enum input_key get_input() {
-    /* DO NOT MODIFY THIS FUNCTION */
     int input = getch();
 
     if (input == KEY_UP) {
@@ -79,7 +78,6 @@ enum input_key get_input() {
         // other keys in if we want other commands, like 'pause' or 'quit')
         return INPUT_NONE;
     }
-    /* DO NOT MODIFY THIS FUNCTION */
 }
 
 /** Helper function that procs the GAME OVER screen and final key prompt.
