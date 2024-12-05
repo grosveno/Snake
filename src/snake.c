@@ -45,7 +45,7 @@ void output_rank() {
         fprintf(file, "\n");
         char out[100];
         int len = mbslen(cur->name);
-        sprintf(out, "%-6d%s%*d", i + 1, len, cur->name, 12 - len, cur->data);
+        sprintf(out, "%-6d%s%*d", i + 1, cur->name, 12 - len, cur->data);
         fprintf(file, "%s", out);     
         cur = cur->next;
     }
